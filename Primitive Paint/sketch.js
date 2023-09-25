@@ -13,7 +13,7 @@ function setup() {
 }
 
 let authorName = "Rapheal";
-
+let action = true;
 
 
 
@@ -28,7 +28,8 @@ function draw() {
   textFont("Courier New");
   fill(0);
   text(authorName, width/2, (height/4) - 50);
-  // autonomousArt();
+  text(authorName, width/2, (height/6) - 50);
+  autonomousArt()
   
 }
 
@@ -56,8 +57,9 @@ function keyTyped() {
 function autonomousArt(){
   // Creating a visual element that works independently of the user's interaction
   
-  // while (true) {
-  //   f = fill(generateRandomColor());
-  // }
-  // circle(40,40,50);
+  fill(generateRandomColor());
+  circle(0, height/2, 100);
+  for (let i = 0; i <= width; i++){
+    circle(i,height/2, 100);
+  }
 }
