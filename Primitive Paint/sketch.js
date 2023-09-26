@@ -33,24 +33,25 @@ function generateRandomColor(){
   return hex;
 }
 
-let x = 0
-// for (x; x >= width; x++){
-//   x = x + 10;
-// }
+let x = 0;
+let xSpeed = 3;
+let ySpeed = 3;
+
 function draw() {
 
-  background(255);
+  // background(255);
 
-  drawAuthorName()
+  drawAuthorName();
   fill(23,54,244);
   noStroke();
   ellipse(x, height/2, 100);
   // autonomousArt()
-  x = x + 3;
+  x = x + xSpeed;
 
-  if (x >= width) {
-    x = -3;
+  if (x + 50 > width || x < 0) {
+    xSpeed = -xSpeed;
   }
+
 }
 
 
