@@ -12,9 +12,19 @@ function setup() {
 
 }
 
-let authorName = "Rapheal";
+
 let action = true;
 
+let authorName = "Rapheal";
+
+function drawAuthorName(){
+  // inscribing the name of the author using the text function
+  textSize(32);
+  textFont("Courier New");
+  fill(0);
+  text(authorName, width/2, (height/4) - 50);
+
+}
 
 
 function generateRandomColor(){
@@ -23,14 +33,24 @@ function generateRandomColor(){
   return hex;
 }
 
+let x = 0
+// for (x; x >= width; x++){
+//   x = x + 10;
+// }
 function draw() {
-  textSize(32);
-  textFont("Courier New");
-  fill(0);
-  text(authorName, width/2, (height/4) - 50);
-  text(authorName, width/2, (height/6) - 50);
-  autonomousArt()
-  
+
+  background(255);
+
+  drawAuthorName()
+  fill(23,54,244);
+  noStroke();
+  ellipse(x, height/2, 100);
+  // autonomousArt()
+  x = x + 3;
+
+  if (x >= width) {
+    x = -3;
+  }
 }
 
 
@@ -53,13 +73,8 @@ function keyTyped() {
 }
 
 
-
-function autonomousArt(){
-  // Creating a visual element that works independently of the user's interaction
-  
-  fill(generateRandomColor());
-  circle(0, height/2, 100);
-  for (let i = 0; i <= width; i++){
-    circle(i,height/2, 100);
-  }
-}
+// function autonomousArt(){
+//   // Creating a visual element that works independently of the user's interaction
+//   fill(generateRandomColor());
+//   ellipse(width/2 + 5, height/2, 100);
+// }
