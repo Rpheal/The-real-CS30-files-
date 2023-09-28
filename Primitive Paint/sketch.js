@@ -7,8 +7,9 @@
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(400,400);
   background(255);
+  
 
 }
 
@@ -34,16 +35,28 @@ function generateRandomColor(){
 }
 
 let x = 0;
-let xSpeed = 3;
-let ySpeed = 3;
+let y = 200 // half of the height of the screen
+let xSpeed = 5;
+let ySpeed = 5;
 
 function draw() {
 
-  // background(255);
+  background(255);
 
   drawAuthorName();
+  fill(generateRandomColor());
+  ellipse(x,y,100);
   
-
+  x = x + xSpeed;
+  y = y + ySpeed;
+  
+  if (x > 400 || x < 0) {
+    xSpeed = - xSpeed;
+  }
+  
+  if (y > 400 || y < 0) {
+    ySpeed = -ySpeed;
+  }
 }
 
 
