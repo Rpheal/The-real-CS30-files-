@@ -1,15 +1,23 @@
 // Prrimitive Paint Assignment 
 // Rapheal Oki
 // 26-09-2023
-//
+
+
+
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// The Commands: 
+// Use "a" or "A" key to draw a rectangle;
+// Use "s" or "S" key to draw a circle;
+// Use "d" or "D" key to draw a Triangle; 
+// Use "r" or "R" key to select a random color; 
+// Use "f" or "F" key to erase your shapes.
+
 
 
 
 // Global Variables 
 let art;
-let action = true;
+let action = false;
 let authorName = "Rapheal";
 
 // The variables for the movement of the balls.
@@ -21,10 +29,11 @@ let ySpeed = 5;
 
 function setup() {
   createCanvas(400,400);
-  background(255);
+  background(200);
   art = createGraphics(400,400);
-  art.background(255);
+  art.background(200);
   art.clear();
+  art.fill("blue")
 }
 
 
@@ -33,7 +42,7 @@ function drawAuthorName(){
   textSize(32);
   textFont("Courier New");
   fill(0);
-  text(authorName, width/2, (height/4) - 50);
+  text(authorName, (width/2)-55, (height/4) - 50);
 }
 
 
@@ -45,7 +54,7 @@ function generateRandomColor(){
 
 
 function draw() {
-  background(255);
+  background(200);
   image(art,0,0);
 
   drawAuthorName();
@@ -59,34 +68,35 @@ function draw() {
     xSpeed = - xSpeed;
   }
   
-  if (y+50 > 400 || y<0) {
+  if (y+50 > 400 || y-50<0) {
     ySpeed = -ySpeed;
   }
 }
 
 
 function keyTyped() {
+    // for user interaction to change the color of the primitive shapes
+    if (key==='r' || key==="R") {
+      let action = true;
+      art.fill(generateRandomColor());
+    }
   // Drawing rectangle
-  if (key === "a") {
-    art.fill(generateRandomColor());
-    art.rect(mouseX,mouseY,50,50);
+  if (key==="a" || key==="A") {
+    art.rect(mouseX,mouseY,90,50);
   }
 
   // drawing ellipse/circles
-  if (key === "s") {
-    art.fill(generateRandomColor());
+  if (key==="s" || key==="S") {
     art.ellipse(mouseX,mouseY, 100);
   }
 
   // drawing triangles
-  if (key === "d") {
-    art.fill(generateRandomColor());
+  if (key==="d" || key==="D" ) {
     art.triangle(mouseX,mouseY,mouseX+40,mouseY+40,mouseX-40,mouseY+40);
   }
 
   // the Erase to make sure that the background Clears one the f key is pressed.
-  if (key === "f") {
-    art.background(255);
+  if (key==="f" || key==="F") {
+    art.background(200);
   }
-  
 }
