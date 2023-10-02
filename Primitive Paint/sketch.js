@@ -33,17 +33,30 @@ function generateRandomColor(){
   return hex;
 }
 
-let x = 0;
-let xSpeed = 3;
-let ySpeed = 3;
-
+let x = 0
+// for (x; x >= width; x++){
+//   x = x + 10;
+// }
 function draw() {
 
-  // background(255);
+  background(255);
 
+<<<<<<< HEAD
   drawAuthorName();
   
 
+=======
+  drawAuthorName()
+  fill(23,54,244);
+  noStroke();
+  ellipse(x, height/2, 100);
+  // autonomousArt()
+  x = x + 3;
+
+  if (x >= width) {
+    x = -3;
+  }
+>>>>>>> parent of bace9ee (at school working on the edge detection)
 }
 
 
