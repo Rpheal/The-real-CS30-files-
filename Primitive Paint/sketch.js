@@ -1,29 +1,48 @@
 // Prrimitive Paint Assignment 
 // Rapheal Oki
 // 26-09-2023
-//
+
+
+
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// The Commands: 
+// Use "a" or "A" key to draw a rectangle;
+// Use "s" or "S" key to draw a circle;
+// Use "d" or "D" key to draw a Triangle; 
+// Use "r" or "R" key to select a random color; 
+// Use "f" or "F" key to erase your shapes.
+
+
+
+
+// Global Variables 
+let art;
+let action = false;
+let authorName = "Rapheal";
+
+// The variables for the movement of the balls.
+let x = 0;
+let y = 200; // half of the height of the screen
+let xSpeed = 5;
+let ySpeed = 5;
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(255);
-
+  createCanvas(400,400);
+  background(200);
+  art = createGraphics(400,400);
+  art.background(200);
+  art.clear();
+  art.fill("blue")
 }
 
-
-let action = true;
-
-let authorName = "Rapheal";
 
 function drawAuthorName(){
   // inscribing the name of the author using the text function
   textSize(32);
   textFont("Courier New");
   fill(0);
-  text(authorName, width/2, (height/4) - 50);
-
+  text(authorName, (width/2)-55, (height/4) - 50);
 }
 
 
@@ -33,6 +52,7 @@ function generateRandomColor(){
   return hex;
 }
 
+<<<<<<< HEAD
 let x = 0
 // for (x; x >= width; x++){
 //   x = x + 10;
@@ -40,10 +60,19 @@ let x = 0
 function draw() {
 
   background(255);
+=======
+
+function draw() {
+  background(200);
+  image(art,0,0);
+>>>>>>> c39a51183ac630f90b4e62de7c8e20c25974b4e9
 
 <<<<<<< HEAD
   drawAuthorName();
+  fill(45,32,56);
+  ellipse(x,y,100);
   
+<<<<<<< HEAD
 
 =======
   drawAuthorName()
@@ -57,30 +86,44 @@ function draw() {
     x = -3;
   }
 >>>>>>> parent of bace9ee (at school working on the edge detection)
+=======
+  x = x + xSpeed;
+  y = y + ySpeed;
+  
+  if (x+50 > 400 || x<0) {
+    xSpeed = - xSpeed;
+  }
+  
+  if (y+50 > 400 || y-50<0) {
+    ySpeed = -ySpeed;
+  }
+>>>>>>> c39a51183ac630f90b4e62de7c8e20c25974b4e9
 }
 
 
 function keyTyped() {
+    // for user interaction to change the color of the primitive shapes
+    if (key==='r' || key==="R") {
+      let action = true;
+      art.fill(generateRandomColor());
+    }
   // Drawing rectangle
-  if (key === "a") {
-    fill(generateRandomColor());
-    rect(mouseX,mouseY,50,50);
+  if (key==="a" || key==="A") {
+    art.rect(mouseX,mouseY,90,50);
   }
 
-  if (key === "s") {
-    fill(generateRandomColor());
-    ellipse(mouseX,mouseY, 100);
+  // drawing ellipse/circles
+  if (key==="s" || key==="S") {
+    art.ellipse(mouseX,mouseY, 100);
   }
 
-  if (key === "d") {
-    fill(generateRandomColor());
-    triangle(mouseX,mouseY,mouseX+40,mouseY+40,mouseX-40,mouseY+40);
+  // drawing triangles
+  if (key==="d" || key==="D" ) {
+    art.triangle(mouseX,mouseY,mouseX+40,mouseY+40,mouseX-40,mouseY+40);
+  }
+
+  // the Erase to make sure that the background Clears one the f key is pressed.
+  if (key==="f" || key==="F") {
+    art.background(200);
   }
 }
-
-
-// function autonomousArt(){
-//   // Creating a visual element that works independently of the user's interaction
-//   fill(generateRandomColor());
-//   ellipse(width/2 + 5, height/2, 100);
-// }
