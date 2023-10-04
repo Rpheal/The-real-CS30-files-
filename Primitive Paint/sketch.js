@@ -52,7 +52,6 @@ function generateRandomColor(){
   return hex;
 }
 
-<<<<<<< HEAD
 let x = 0
 // for (x; x >= width; x++){
 //   x = x + 10;
@@ -60,12 +59,6 @@ let x = 0
 function draw() {
 
   background(255);
-=======
-
-function draw() {
-  background(200);
-  image(art,0,0);
->>>>>>> c39a51183ac630f90b4e62de7c8e20c25974b4e9
 
 <<<<<<< HEAD
   drawAuthorName();
