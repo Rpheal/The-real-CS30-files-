@@ -8,20 +8,21 @@
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  rectMode(CENTER);
 }
 
 function draw() {
   background(200);
-  fill(0);
   drawRoad();
 }
 
 
 function drawRoad(){
-  rect(0,height/5,width,height/1.9);
-  for(let i=0; i < width; i+=10){
-    fill(255);
-    strokeWeight(4);
-    line(0+i,height/1.9/2,i,height/1.9/2);
+  fill(0);
+  rect(width/2,height/2,width,height/1.9);
+  stroke(255, 255, 0);
+  strokeWeight(6);
+  for(let i=0; i < width; i+=100){
+    line(i,height/2,i+50  ,height/2);
   }
 }
