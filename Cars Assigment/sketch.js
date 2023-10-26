@@ -26,6 +26,10 @@ function mouseClicked(){
   eastbound.push(new Vehicle(mouseX, mouseY, 1));
 }
 
+function drawVehicle(){
+  
+}
+
 function drawRoad(){
   fill(0);
   noStroke();
