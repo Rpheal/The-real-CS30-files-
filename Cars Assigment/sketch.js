@@ -9,6 +9,12 @@
 
 let eastbound = [];
 
+
+function drawCarImage(){
+  fill(0);
+  rect(0,0,25,25);
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
@@ -22,12 +28,14 @@ function draw() {
   }
 }
 
+
 function mouseClicked(){
   eastbound.push(new Vehicle(mouseX, mouseY, 1));
 }
 
-function drawVehicle(){
-  
+function drawCarImage(){
+  fill(0);
+  rect(0,0,25,25);
 }
 
 function drawRoad(){
