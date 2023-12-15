@@ -6,15 +6,37 @@
 // -
 
 let score = 0; let balance = 10000; let stockPrice = 100;
-let stocksOwned = 0;
+let stocksOwned = 0; let buyStockButton; let sellStockButton;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
   textSize(32);
-  // createButton('Buy').mousePressed(buyStock);
-  // createButton('Sell').mousePressed(sellStock);
+  // let buyButton =  createButton('Buy','green').mousePressed(buyStock);
+  // buyButton.position(width/3,150);
+  // let sellButton =  createButton('Sell','red').mousePressed(sellStock);
+  // sellButton.position(width/3+50,150);
+
+  buyStockButton = new Button({
+		x: width / 2,	y: height / 2,
+		width: 100,		height: 50,
+		align_x: 0,		align_y: 0,
+		content: 'Buy',
+		on_press() {
+			buyStockButton.text('Buy');
+		}
+	});
+
+  sellStockButton = new Button({
+		x: width / 2,	y: height / 2,
+		width: 100,		height: 50,
+		align_x: 0,		align_y: 0,
+		content: 'Sell',
+		on_press() {
+			sellStockButton.text("Sell");
+		}
+	});
 
 }
 
@@ -24,7 +46,8 @@ function draw() {
   fill(0);
   displayInfo();
   text(`Money: ${score}`, width / 2, height / 2);
-  
+  sellStockButton.draw();
+  buyStockButton.draw();
 
 
   // Button
