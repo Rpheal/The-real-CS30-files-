@@ -13,28 +13,27 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
   textSize(32);
-  // let buyButton =  createButton('Buy','green').mousePressed(buyStock);
-  // buyButton.position(width/3,150);
-  // let sellButton =  createButton('Sell','red').mousePressed(sellStock);
-  // sellButton.position(width/3+50,150);
+
 
   buyStockButton = new Button({
-		x: width / 2,	y: height / 2,
-		width: 100,		height: 50,
-		align_x: 0,		align_y: 0,
+		x: width / 3,	y: 190,
+		width: 100,		height: 50, // properties of the button
+    //style.background('green');
 		content: 'Buy',
 		on_press() {
-			buyStockButton.text('Buy');
+      buyStock();
 		}
 	});
 
+  buyStockButton.style("style_default",style.background="#000");
+
+
   sellStockButton = new Button({
-		x: width / 2,	y: height / 2,
-		width: 100,		height: 50,
-		align_x: 0,		align_y: 0,
+		x: width / 3+150,	y: 190,
+		width: 100,		height: 50, // properties of the button
 		content: 'Sell',
 		on_press() {
-			sellStockButton.text("Sell");
+      sellStock();
 		}
 	});
 
