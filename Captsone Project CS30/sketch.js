@@ -14,6 +14,59 @@ function setup() {
   textAlign(CENTER, CENTER);
   textSize(32);
 
+// Menu
+// Initialization of the Menubuttons and properties styling included 
+  fill(250);
+  rect(33,200,50);
+
+
+  menuButton1 = new Button({
+    x: width / 10,	y: 100,
+		width: 100,		height: 50, // properties of the button
+		content: 'menuButton1',
+		on_press() {
+      buyStock();
+		}
+  });
+
+  menuButton2 = new Button({
+    x: width / 10,	y: 200,
+		width: 100,		height: 50, // properties of the button
+		content: 'menuButton2',
+		on_press() {
+      buyStock();
+		}
+  });
+
+  menuButton3 = new Button({
+    x: width / 10,	y: 300,
+		width: 100,		height: 50, // properties of the button
+		content: 'menuButton3',
+		on_press() {
+      buyStock();
+		}
+  });
+
+  menuButton4 = new Button({
+    x: width / 10,	y: 400,
+		width: 100,		height: 50, // properties of the button
+		content: 'menuButton4',
+		on_press() {
+      buyStock();
+		}
+  });
+
+  menuButton5 = new Button({
+    x: width / 10,	y: 500,
+		width: 100,		height: 50, // properties of the button
+		content: 'menuButton5',
+		on_press() {
+      buyStock();
+		}
+  });
+
+
+// Format of Menu ended.
 
   buyStockButton = new Button({
 		x: width / 3,	y: 190,
@@ -25,7 +78,7 @@ function setup() {
 		}
 	});
 
-  buyStockButton.style("style_default",style.background="#000");
+  //buyStockButton.style("style_default",style.background="#000");
 
 
   sellStockButton = new Button({
@@ -47,6 +100,11 @@ function draw() {
   text(`Money: ${score}`, width / 2, height / 2);
   sellStockButton.draw();
   buyStockButton.draw();
+  menuButton1.draw();
+  menuButton2.draw();
+  menuButton3.draw();
+  menuButton4.draw();
+  menuButton5.draw();
 
 
   // Button
