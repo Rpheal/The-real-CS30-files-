@@ -17,53 +17,77 @@ function setup() {
 // Menu
 // Initialization of the Menubuttons and properties styling included 
   fill(250);
-  rect(33,200,50);
-
+  
 
   menuButton1 = new Button({
-    x: width / 10,	y: 100,
+    x: width / 13,	y: 100,
 		width: 100,		height: 50, // properties of the button
-		content: 'menuButton1',
+		content: 'Home',
 		on_press() {
       buyStock();
 		}
   });
+  menuButton1.style("default", {background: '#00C2D1', color: '#fff'});
+  menuButton1.style("hover", {
+    background: 'F4FAFF',
+    color: '#06f'
+  })
 
   menuButton2 = new Button({
-    x: width / 10,	y: 200,
+    x: width / 13,	y: 300,
 		width: 100,		height: 50, // properties of the button
-		content: 'menuButton2',
+		content: 'Stock',
 		on_press() {
       buyStock();
 		}
   });
+  menuButton2.style("default", {background: '#00C2D1', color: '#fff'});
+  menuButton2.style("hover", {
+    background: 'F4FAFF',
+    color: '#06f'
+  })
 
   menuButton3 = new Button({
-    x: width / 10,	y: 300,
+    x: width / 13,	y: 500,
 		width: 100,		height: 50, // properties of the button
-		content: 'menuButton3',
+		content: 'Business',
 		on_press() {
       buyStock();
 		}
   });
+  menuButton3.style("default", {background: '#00C2D1', color: '#fff'});
+  menuButton3.style("hover", {
+    background: '#F4FAFF',
+    color: '#06f'
+  })
 
   menuButton4 = new Button({
-    x: width / 10,	y: 400,
+    x: width / 13,	y: 700,
 		width: 100,		height: 50, // properties of the button
-		content: 'menuButton4',
+		content: 'Profile',
 		on_press() {
       buyStock();
 		}
   });
+  menuButton4.style("default", {background: '#00C2D1', color: '#fff'});
+  menuButton4.style("hover", {
+    background: '#F4FAFF',
+    color: '#06f'
+  })
 
   menuButton5 = new Button({
-    x: width / 10,	y: 500,
+    x: width / 13,	y: 900,
 		width: 100,		height: 50, // properties of the button
-		content: 'menuButton5',
+		content: 'Ranking',
 		on_press() {
       buyStock();
 		}
   });
+  menuButton5.style("default", {background: '#00C2D1', color: '#fff'});
+  menuButton5.style("hover", {
+    background: '#F4FAFF',
+    color: '#06f'
+  })
 
 
 // Format of Menu ended.
@@ -78,7 +102,7 @@ function setup() {
 		}
 	});
 
-  //buyStockButton.style("style_default",style.background="#000");
+  buyStockButton.style("default", {background: 'green', color: '#fff'});
 
 
   sellStockButton = new Button({
@@ -90,23 +114,27 @@ function setup() {
 		}
 	});
 
+  sellStockButton.style("default", {background: 'red', color: '#fff'});
+
 }
 
 
 function draw() {
-  background(220);
+  background('#90BDDF');
   fill(0);
   displayInfo();
   text(`Money: ${score}`, width / 2, height / 2);
   sellStockButton.draw();
   buyStockButton.draw();
+  fill('#122C3F');
+  rect(0,0,width/10, height, 0, 20, 20, 0);
   menuButton1.draw();
   menuButton2.draw();
   menuButton3.draw();
   menuButton4.draw();
   menuButton5.draw();
-
-
+  
+  
   // Button
   fill(150, 200, 255);
   rectMode(CORNER);
