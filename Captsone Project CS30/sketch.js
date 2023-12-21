@@ -198,3 +198,87 @@ function updateStockPrice() {
   stockPrice = random(80, 120);
 }
 
+//
+// class Stock {
+//   constructor(name, initialPrice, volatility) {
+//     this.name = name;
+//     this.price = initialPrice;
+//     this.history = [];
+//     this.volatility = volatility;
+//   }
+
+//   updatePrice() {
+//     // Simulate a random walk model
+//     let randomChange = randomGaussian(0, this.volatility);
+//     this.price += randomChange;
+
+//     // Ensure the price doesn't go negative
+//     this.price = max(this.price, 0);
+
+//     // Store the current stock price in the history array
+//     this.history.push(this.price);
+
+//     // Trim the history array to keep only the last 30 values
+//     if (this.history.length > 30) {
+//       this.history.shift();
+//     }
+//   }
+
+//   drawGraph(x, y, width, height) {
+//     // Draw the stock price graph
+//     noFill();
+//     stroke(0, 0, 255);
+//     strokeWeight(2);
+//     beginShape();
+//     for (let i = 0; i < this.history.length; i++) {
+//       let graphX = map(i, 0, this.history.length - 1, x, x + width);
+//       let graphY = map(this.history[i], min(this.history), max(this.history), y + height, y);
+//       vertex(graphX, graphY);
+//     }
+//     endShape();
+
+//     // Draw graph border
+//     rect(x, y, width, height);
+//   }
+// }
+
+// let marcedesBenc = new Stock("Marcedes-Benc", 100, 2);
+// let dmw = new Stock("DMW", 80, 3);
+// let currentDate = new Date(2024, 0, 1); // January 1, 2024
+// let daysPassed = 0;
+
+// function setup() {
+//   createCanvas(windowWidth, windowHeight);
+
+//   // Set interval for stock price updates (every day)
+//   setInterval(updateStockPrices, 86400000); // 86400000 milliseconds = 1 day
+// }
+
+// function draw() {
+//   background(220);
+
+//   // Display stock information
+//   textSize(16);
+//   fill(0);
+//   text(`Marcedes-Benc Price: $${marcedesBenc.price.toFixed(2)}`, 10, 30);
+//   text(`DMW Price: $${dmw.price.toFixed(2)}`, 10, 60);
+//   text(`Date: ${currentDate.toDateString()}`, 10, 90);
+
+//   // Draw stock price graphs
+//   marcedesBenc.drawGraph(10, 120, 300, 150);
+//   dmw.drawGraph(10, 300, 300, 150);
+// }
+
+// function updateStockPrices() {
+//   // Update prices for both stocks
+//   marcedesBenc.updatePrice();
+//   dmw.updatePrice();
+
+//   // Increment the date (1 day passed)
+//   currentDate.setDate(currentDate.getDate() + 1);
+//   daysPassed++;
+
+//   // Display new date in console
+//   console.log(`Day ${daysPassed}: ${currentDate.toDateString()}`);
+// }
+
