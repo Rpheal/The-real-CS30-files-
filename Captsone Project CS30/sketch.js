@@ -18,7 +18,6 @@ function setup() {
 // Initialization of the Menubuttons and properties styling included 
   fill(250);
   
-
   menuButton1 = new Button({
     x: width / 13,	y: 100,
 		width: 100,		height: 50, // properties of the button
