@@ -6,7 +6,7 @@
 // -
 
 let score = 0; let balance = 10000; let stockPrice = 100;
-let stocksOwned = 0; let buyStockButton; let sellStockButton;
+let stocksOwned = 0; let buyStockButton; let sellStockButton; let mgr;
 
 
 function setup() {
@@ -115,6 +115,10 @@ function setup() {
 
   sellStockButton.style("default", {background: 'red', color: '#fff'});
 
+  mgr = new SceneManager();
+  mgr.addScene(homePage);
+  mgr.showScene(homePage);
+
 }
 
 
@@ -140,6 +144,7 @@ function draw() {
   rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
   fill(0);
   text("Click me!", width / 2, height / 2 + 75);
+  mgr.draw();
 }
 
 
@@ -196,6 +201,68 @@ function sellStock() {
 
 function updateStockPrice() {
   stockPrice = random(80, 120);
+}
+
+
+// scene manager
+
+function homePage(){
+  // building the home page of the simulator using the Scene Manager
+
+  this.setup = function(){
+    
+  }
+
+  this.draw = function(){
+    // background('#90BDDF');
+    // fill(0);
+    // displayInfo();
+    // text(`Money: ${score}`, width / 2, height / 2);
+    // sellStockButton.draw();
+    // buyStockButton.draw();
+    // fill('#122C3F');
+    // rect(0,0,width/10, height, 0, 20, 20, 0);
+    // menuButton1.draw();
+    // menuButton2.draw();
+    // menuButton3.draw();
+    // menuButton4.draw();
+    // menuButton5.draw();
+    
+    
+    // // Button
+    // fill(150, 200, 255);
+    // rectMode(CORNER);
+    // rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
+    // fill(0);
+    // text("Click me!", width / 2, height / 2 + 75);
+
+    //background("teal");
+
+
+  }
+
+  this.mousePressed = function(){
+
+  }
+}
+
+// Stock Page
+
+function stockPage(){
+  // building the home page of the simulator using the Scene Manager
+
+  this.setup = function(){
+    
+  }
+
+  this.draw = function(){
+
+
+  }
+
+  this.mousePressed = function(){
+
+  }
 }
 
 //
