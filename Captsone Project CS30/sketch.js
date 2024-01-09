@@ -10,6 +10,10 @@ let stocksOwned = 0; let buyStockButton; let sellStockButton; let mgr;
 
 
 function setup() {
+  mgr = new SceneManager();
+  mgr.addScene(homePage);
+  //mgr.showScene(homePage);
+
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
   textSize(32);
@@ -23,7 +27,7 @@ function setup() {
 		width: 100,		height: 50, // properties of the button
 		content: 'Home',
 		on_press() {
-      buyStock();
+      mgr.draw();
 		}
   });
   menuButton1.style("default", {background: '#00C2D1', color: '#fff'});
@@ -115,35 +119,33 @@ function setup() {
 
   sellStockButton.style("default", {background: 'red', color: '#fff'});
 
-  mgr = new SceneManager();
-  mgr.addScene(homePage);
-  mgr.showScene(homePage);
+
 
 }
 
 
 function draw() {
-  background('#90BDDF');
-  fill(0);
-  displayInfo();
-  text(`Money: ${score}`, width / 2, height / 2);
-  sellStockButton.draw();
-  buyStockButton.draw();
-  fill('#122C3F');
-  rect(0,0,width/10, height, 0, 20, 20, 0);
-  menuButton1.draw();
-  menuButton2.draw();
-  menuButton3.draw();
-  menuButton4.draw();
-  menuButton5.draw();
+  // background('#90BDDF');
+  // fill(0);
+  // displayInfo();
+  // text(`Money: ${score}`, width / 2, height / 2);
+  // sellStockButton.draw();
+  // buyStockButton.draw();
+  // fill('#122C3F');
+  // rect(0,0,width/10, height, 0, 20, 20, 0);
+  // menuButton1.draw();
+  // menuButton2.draw();
+  // menuButton3.draw();
+  // menuButton4.draw();
+  // menuButton5.draw();
   
   
-  // Button
-  fill(150, 200, 255);
-  rectMode(CORNER);
-  rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
-  fill(0);
-  text("Click me!", width / 2, height / 2 + 75);
+  // // Button
+  // fill(150, 200, 255);
+  // rectMode(CORNER);
+  // rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
+  // fill(0);
+  // text("Click me!", width / 2, height / 2 + 75);
   mgr.draw();
 }
 
@@ -214,29 +216,27 @@ function homePage(){
   }
 
   this.draw = function(){
-    // background('#90BDDF');
-    // fill(0);
-    // displayInfo();
-    // text(`Money: ${score}`, width / 2, height / 2);
-    // sellStockButton.draw();
-    // buyStockButton.draw();
-    // fill('#122C3F');
-    // rect(0,0,width/10, height, 0, 20, 20, 0);
-    // menuButton1.draw();
-    // menuButton2.draw();
-    // menuButton3.draw();
-    // menuButton4.draw();
-    // menuButton5.draw();
+    background('#90BDDF');
+    fill(0);
+    displayInfo();
+    text(`Money: ${score}`, width / 2, height / 2);
+    sellStockButton.draw();
+    buyStockButton.draw();
+    fill('#122C3F');
+    rect(0,0,width/10, height, 0, 20, 20, 0);
+    menuButton1.draw();
+    menuButton2.draw();
+    menuButton3.draw();
+    menuButton4.draw();
+    menuButton5.draw();
     
     
-    // // Button
-    // fill(150, 200, 255);
-    // rectMode(CORNER);
-    // rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
-    // fill(0);
-    // text("Click me!", width / 2, height / 2 + 75);
-
-    //background("teal");
+    // Button
+    fill(150, 200, 255);
+    rectMode(CORNER);
+    rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
+    fill(0);
+    text("Click me!", width / 2, height / 2 + 75);
 
 
   }
@@ -264,6 +264,8 @@ function stockPage(){
 
   }
 }
+
+
 
 //
 // class Stock {
