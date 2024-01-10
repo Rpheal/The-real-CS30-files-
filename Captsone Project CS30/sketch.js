@@ -1,9 +1,6 @@
 // Business Simulator
 // Rapheal Oki & Alvin Shen
 // 12/11/2023
-//
-// Extra for Experts:
-// -
 
 let score = 0; let balance = 10000; let stockPrice = 100;
 let stocksOwned = 0; let buyStockButton; let sellStockButton; let mgr;
@@ -12,7 +9,7 @@ let stocksOwned = 0; let buyStockButton; let sellStockButton; let mgr;
 function setup() {
   mgr = new SceneManager();
   mgr.addScene(homePage);
-  //mgr.showScene(homePage);
+  mgr.showScene(homePage);
 
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
@@ -22,72 +19,72 @@ function setup() {
 // Initialization of the Menubuttons and properties styling included 
   fill(250);
   
-  menuButton1 = new Button({
+  homeButton = new Button({
     x: width / 13,	y: 100,
 		width: 100,		height: 50, // properties of the button
 		content: 'Home',
 		on_press() {
-      mgr.draw();
+      mgr.showScene(stockPage);
 		}
   });
-  menuButton1.style("default", {background: '#00C2D1', color: '#fff'});
-  menuButton1.style("hover", {
+  homeButton.style("default", {background: '#00C2D1', color: '#fff'});
+  homeButton.style("hover", {
     background: 'F4FAFF',
     color: '#06f'
   })
 
-  menuButton2 = new Button({
+  stockButton = new Button({
     x: width / 13,	y: 300,
 		width: 100,		height: 50, // properties of the button
 		content: 'Stock',
 		on_press() {
-      buyStock();
+      mgr.showScene(stockPage);
 		}
   });
-  menuButton2.style("default", {background: '#00C2D1', color: '#fff'});
-  menuButton2.style("hover", {
+  stockButton.style("default", {background: '#00C2D1', color: '#fff'});
+  stockButton.style("hover", {
     background: 'F4FAFF',
     color: '#06f'
   })
 
-  menuButton3 = new Button({
+  businessButton = new Button({
     x: width / 13,	y: 500,
 		width: 100,		height: 50, // properties of the button
 		content: 'Business',
 		on_press() {
-      buyStock();
+      mgr.showScene(stockPage);
 		}
   });
-  menuButton3.style("default", {background: '#00C2D1', color: '#fff'});
-  menuButton3.style("hover", {
+  businessButton.style("default", {background: '#00C2D1', color: '#fff'});
+  businessButton.style("hover", {
     background: '#F4FAFF',
     color: '#06f'
   })
 
-  menuButton4 = new Button({
+  profileButton = new Button({
     x: width / 13,	y: 700,
 		width: 100,		height: 50, // properties of the button
 		content: 'Profile',
 		on_press() {
-      buyStock();
+      mgr.showScene(stockPage);
 		}
   });
-  menuButton4.style("default", {background: '#00C2D1', color: '#fff'});
-  menuButton4.style("hover", {
+  profileButton.style("default", {background: '#00C2D1', color: '#fff'});
+  profileButton.style("hover", {
     background: '#F4FAFF',
     color: '#06f'
   })
 
-  menuButton5 = new Button({
+  rankingButton = new Button({
     x: width / 13,	y: 900,
 		width: 100,		height: 50, // properties of the button
 		content: 'Ranking',
 		on_press() {
-      buyStock();
+      mgr.showScene(stockPage);
 		}
   });
-  menuButton5.style("default", {background: '#00C2D1', color: '#fff'});
-  menuButton5.style("hover", {
+  rankingButton.style("default", {background: '#00C2D1', color: '#fff'});
+  rankingButton.style("hover", {
     background: '#F4FAFF',
     color: '#06f'
   })
@@ -125,28 +122,13 @@ function setup() {
 
 
 function draw() {
-  // background('#90BDDF');
-  // fill(0);
-  // displayInfo();
-  // text(`Money: ${score}`, width / 2, height / 2);
-  // sellStockButton.draw();
-  // buyStockButton.draw();
-  // fill('#122C3F');
-  // rect(0,0,width/10, height, 0, 20, 20, 0);
-  // menuButton1.draw();
-  // menuButton2.draw();
-  // menuButton3.draw();
-  // menuButton4.draw();
-  // menuButton5.draw();
-  
-  
-  // // Button
-  // fill(150, 200, 255);
-  // rectMode(CORNER);
-  // rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
-  // fill(0);
-  // text("Click me!", width / 2, height / 2 + 75);
-  mgr.draw();
+  // Button
+  fill(150, 200, 255);
+  rectMode(CORNER);
+  rect(width / 2 - 80, height / 2 + 50, 160, 50, 15);
+  fill(0);
+  text("Click me!", width / 2, height / 2 + 75);
+  mgr.draw()
 }
 
 
@@ -200,7 +182,6 @@ function sellStock() {
   }
 }
 
-
 function updateStockPrice() {
   stockPrice = random(80, 120);
 }
@@ -209,7 +190,7 @@ function updateStockPrice() {
 // scene manager
 
 function homePage(){
-  // building the home page of the simulator using the Scene Manager
+  // building the home page of the simulator using the Scene Manager 
 
   this.setup = function(){
     
@@ -218,17 +199,18 @@ function homePage(){
   this.draw = function(){
     background('#90BDDF');
     fill(0);
-    displayInfo();
+    // displayInfo();
     text(`Money: ${score}`, width / 2, height / 2);
     sellStockButton.draw();
     buyStockButton.draw();
     fill('#122C3F');
     rect(0,0,width/10, height, 0, 20, 20, 0);
-    menuButton1.draw();
-    menuButton2.draw();
-    menuButton3.draw();
-    menuButton4.draw();
-    menuButton5.draw();
+    homeButton.draw();
+    stockButton.draw();
+    businessButton.draw();
+    profileButton.draw();
+    rankingButton.draw();
+
     
     
     // Button
@@ -256,7 +238,86 @@ function stockPage(){
   }
 
   this.draw = function(){
+    background('#90BDDF');
+    fill('#122C3F');
+    rect(0,0,width/10, height, 0, 20, 20, 0);
+    homeButton.draw();
+    stockButton.draw();
+    businessButton.draw();
+    profileButton.draw();
+    rankingButton.draw();
 
+  }
+
+  this.mousePressed = function(){
+
+  }
+}
+
+function businessPage(){
+  // building the home page of the simulator using the Scene Manager
+
+  this.setup = function(){
+    
+  }
+
+  this.draw = function(){
+    background('#90BDDF');
+    fill('#122C3F');
+    rect(0,0,width/10, height, 0, 20, 20, 0);
+    homeButton.draw();
+    stockButton.draw();
+    businessButton.draw();
+    profileButton.draw();
+    rankingButton.draw();
+
+  }
+
+  this.mousePressed = function(){
+
+  }
+}
+
+function profilePage(){
+  // building the home page of the simulator using the Scene Manager
+
+  this.setup = function(){
+    
+  }
+
+  this.draw = function(){
+    background('#90BDDF');
+    fill('#122C3F');
+    rect(0,0,width/10, height, 0, 20, 20, 0);
+    homeButton.draw();
+    stockButton.draw();
+    businessButton.draw();
+    profileButton.draw();
+    rankingButton.draw();
+
+  }
+
+  this.mousePressed = function(){
+
+  }
+}
+
+function rankingPage(){
+  // building the home page of the simulator using the Scene Manager
+
+  this.setup = function(){
+    
+  }
+
+  this.draw = function(){
+    background('#90BDDF');
+    fill('#122C3F');
+    rect(0,0,width/10, height, 0, 20, 20, 0);
+    homeButton.draw();
+    stockButton.draw();
+    businessButton.draw();
+    profileButton.draw();
+    rankingButton.draw();
 
   }
 
