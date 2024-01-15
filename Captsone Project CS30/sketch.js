@@ -42,7 +42,7 @@ function setup() {
 		width: 100,		height: 50, // properties of the button
 		content: 'Business',
 		on_press() {
-      mgr.showScene(stockPage);
+      mgr.showScene(businessPage);
 		}
   });
   businessButton.style("default", {background: '#00C2D1', color: '#fff'});
@@ -57,7 +57,7 @@ function setup() {
 		width: 100,		height: 50, // properties of the button
 		content: 'Profile',
 		on_press() {
-      mgr.showScene(stockPage);
+      mgr.showScene(profilePage);
 		}
   });
   profileButton.style("default", {background: '#00C2D1', color: '#fff'});
@@ -88,7 +88,7 @@ function setup() {
 		width: 100,		height: 50, // properties of the button
 		content: 'Ranking',
 		on_press() {
-      mgr.showScene(stockPage);
+      mgr.showScene(rankingPage);
 		}
   });
   rankingButton.style("default", {background: '#00C2D1', color: '#fff'});
@@ -334,6 +334,24 @@ function profilePage(){
     businessButton.draw();
     profileButton.draw();
     rankingButton.draw();
+
+    // the profile card
+    fill('#122C3F');
+    rect(width/7, 90,400,400,20,20,20,20);
+    textSize(16);
+    fill('#90BDDF');
+    text('Fortune', width/7+60, 160 );
+    text('Balance', width/7+60, 200);
+    text('Stocks  ', width/7+60, 240);
+    // text(`DMW Price: $${dmw.price.toFixed(2)}`, width/5, 50);
+    // text(`Date: ${currentDate.toDateString()}`, width/5, 70);
+    fill('#122C3F');
+    rect(width/7, 510,400,400,20,20,20,20);
+    fill('#90BDDF');
+    text('Statistics', width/7+185, 570 );
+
+    fill('#122C3f');
+    rect(width/7 + 500, 90, 1000,820,20,20,20,20);
 
   }
 
