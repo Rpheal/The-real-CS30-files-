@@ -335,7 +335,7 @@ function profilePage(){
     profileButton.draw();
     rankingButton.draw();
 
-    // the profile card
+    // The profile card
     fill('#122C3F');
     rect(width/7, 90,400,400,20,20,20,20);
     textSize(16);
@@ -345,11 +345,14 @@ function profilePage(){
     text('Stocks  ', width/7+60, 240);
     // text(`DMW Price: $${dmw.price.toFixed(2)}`, width/5, 50);
     // text(`Date: ${currentDate.toDateString()}`, width/5, 70);
+
+    // Statistics Display cars
     fill('#122C3F');
     rect(width/7, 510,400,400,20,20,20,20);
     fill('#90BDDF');
     text('Statistics', width/7+185, 570 );
 
+    // Assets display card to show the pictures of property like cars and real estate houses that the user owns
     fill('#122C3f');
     rect(width/7 + 500, 90, 1000,820,20,20,20,20);
 
