@@ -1,13 +1,11 @@
 // The Balloon Tree
 // Rapheal Oki
 // 30/12/2023
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+
 
 
 let depth = 7; let leafdepth = 0; let startingcolors; 
-const scale =  20;
+const scale =  10;
 
 let angleOffset;
 function setup() {
@@ -17,8 +15,6 @@ function setup() {
 
   startingcolors = random(255);
 }
-
-
 
 
 function draw() {
@@ -31,15 +27,11 @@ function draw() {
 }
 
 
-
-
 function drawLine(x1, y1, x2, y2, thickness) {
   // draw a line segment connecting (x1,y1) to (x2,y2)
   strokeWeight(thickness);
   line(x1, y1, x2, y2);
 }
-
-
 
 
 function drawTree(x1, y1, angle, depth) {
@@ -69,19 +61,13 @@ function drawTree(x1, y1, angle, depth) {
   }
 }
 
-
-
-
 function drawLeaf(x, y, leafdepth) {
+  // the draw leaf function
   fill(random(255), random(255), random(255));
   let leafSize = map(depth, 0, leafdepth+1, 1, 10);
-  leafSize = leafSize * random(0.1,1);
   
   circle(x, y, leafSize);
 }
-
-
-
 
 function keyPressed() {
   if (key === "z" && leafdepth > 1) {

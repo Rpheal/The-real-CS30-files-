@@ -2,22 +2,35 @@
 // Rapheal Oki & Alvin Shen
 // 12/11/2023
 
-let score = 0; let balance = 10000; let stockPrice = 100;
-let stocksOwned = 0; let buyStockButton; let sellStockButton; let mgr; let marcedesBenc; let dmw;
-let currentDate; let daysPassed;
+let score = 0;
+let balance = 10000; 
+let stockPrice = 100;
+let stocksOwned = 0; 
+let buyStockButton; 
+let sellStockButton; 
+let mgr; 
+let marcedesBenc; 
+let dmw;
+let currentDate; 
+let daysPassed;
 
 let mykrosofft;
 let tassla;
 let amason;
 let bojieng;
 
-let stocks = [marcedesBenc, dmw, mykrosofft, tassla, amason, bojieng];
+
 let user;
 
 let buyButtons = [];
 let sellButtons = [];
 
-
+function pageButtons(){
+  stockButton.draw();
+  businessButton.draw();
+  profileButton.draw();
+  rankingButton.draw();
+}
 
 function setup() {
   mgr = new SceneManager();
@@ -228,10 +241,7 @@ function homePage(){
     fill('#122C3F');
     rect(0,0,width/10, height, 0, 20, 20, 0);
     // homeButton.draw();
-    stockButton.draw();
-    businessButton.draw();
-    profileButton.draw();
-    rankingButton.draw();
+    pageButtons();
 
     
     
@@ -250,115 +260,7 @@ function homePage(){
   }
 }
 
-class Stock {
-  constructor(name, initialPrice, volatility) {
-    this.name = name;
-    this.price = initialPrice;
-    this.history = [];
-    this.volatility = volatility;
-    this.quantity = 0;
-  }
 
-  updatePrice() {
-    // Simulate a random walk model
-    let randomChange = randomGaussian(0, this.volatility);
-    this.price += randomChange;
-
-    // Ensure the price doesn't go negative
-    this.price = max(this.price, 0);
-
-    // Store the current stock price in the history array
-    this.history.push(this.price);
-
-    // Trim the history array to keep only the last 30 values
-    if (this.history.length > 30) {
-      this.history.shift();
-    }
-  }
-
-  drawGraph(x, y, width, height) {
-    // Draw the stock price graph
-    noFill();
-    stroke(0, 0, 255);
-    strokeWeight(2);
-    beginShape();
-    for (let i = 0; i < this.history.length; i++) {
-      let graphX = map(i, 0, this.history.length - 1, x, x + width);
-      let graphY = map(this.history[i], min(this.history), max(this.history), y + height, y);
-      vertex(graphX, graphY);
-    }
-    endShape();
-
-    // Draw graph border
-    noFill();
-    stroke(200);
-    strokeWeight(1);
-    rect(x, y, width, height);
-  }
-}
-
-class buttons {
-  constructor(label, x, y, width, height, onClick) {
-    this.label = label;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.onClick = onClick;
-  }
-
-  display() {
-    fill(150);
-    rect(this.x, this.y, this.width, this.height);
-    fill(255);
-    textSize(12);
-    textAlign(CENTER, CENTER);
-    text(this.label, this.x + this.width / 2, this.y + this.height / 2);
-  }
-
-  isClicked(mouseX, mouseY) {
-    return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;
-  }
-}
-
-class User {
-  constructor() {
-    this.balance = 1000;
-    this.holdings = [];
-  }
-
-  buyStock(stock, quantity) {
-    let totalCost = stock.price * quantity;
-    if (this.balance >= totalCost) {
-      this.balance -= totalCost;
-      if (!this.holdings.includes(stock)) {
-        stock.quantity = 0;
-        this.holdings.push(stock);
-      }
-      stock.quantity += quantity;
-      return true; // Buy successful
-    } else {
-      return false; // Insufficient funds
-    }
-  }
-
-  sellStock(stock, quantity) {
-    if (stock.quantity >= quantity) {
-      this.balance += stock.price * quantity;
-      stock.quantity -= quantity;
-      if (stock.quantity === 0) {
-        this.holdings = this.holdings.filter((s) => s !== stock);
-      }
-      return true; // Sell successful
-    } else {
-      return false; // Insufficient stocks to sell
-    }
-  }
-
-  calculatePortfolioValue() {
-    return this.holdings.reduce((total, stock) => total + stock.price * stock.quantity, 0);
-  }
-}
 
 
 function stockPage(){
@@ -372,17 +274,42 @@ function stockPage(){
   tassla = new Stock("Tassla", 150, 4);
   amason = new Stock("Amason", 180, 5);
   bojieng = new Stock("Bojieng", 90, 2.2);
+  user = new User();
 
-  // setInterval(updateStockPrices, 1000); // 86400000 milliseconds = 1 day
+
+
+  let stocks = [marcedesBenc, dmw, mykrosofft, tassla, amason, bojieng];
 
 
   this.setup = function(){
-    // Set interval for stock price updates (every day)
     setInterval(updateStockPrices, 1000); // 86400000 milliseconds = 1 day
-    user = new User();
 
-  // Set interval for stock price updates (every day)
-  // setInterval(updateStockPrices, 1000); // 1000 milliseconds = 1 second
+
+    
+  function updateStockPrices() {
+    // Update prices for all stocks
+    for (let stock of stocks) {
+      stock.updatePrice();
+    }
+  }
+
+  function buyStockPrompt(stock) {
+    let quantity = prompt(`Enter the quantity of ${stock.name} stocks you want to buy:`);
+    quantity = parseInt(quantity);
+    if (!isNaN(quantity) && quantity > 0) {
+      user.buyStock(stock, quantity);
+    }
+  }
+
+  function sellStockPrompt(stock) {
+    let quantity = prompt(`Enter the quantity of ${stock.name} stocks you want to sell:`);
+    quantity = parseInt(quantity);
+    if (!isNaN(quantity) && quantity > 0) {
+      user.sellStock(stock, quantity);
+    }
+  }
+
+
 
   // Initialize buttons
   for (let i = 0; i < stocks.length; i++) {
@@ -407,10 +334,7 @@ function stockPage(){
     fill('#122C3F');
     rect(0,0,width/10, height, 0, 20, 20, 0);
     // homeButton.draw();
-    stockButton.draw();
-    businessButton.draw();
-    profileButton.draw();
-    rankingButton.draw();
+    pageButtons();
 
       // Display stock information and draw graphs with 2 stocks on each row
   let numRows = 3;
@@ -426,6 +350,8 @@ function stockPage(){
     let colNum = i % numCols;
 
     let stock = stocks[i];
+
+
 
     // Display stock information
     textSize(14); // Smaller text size
@@ -478,7 +404,20 @@ function stockPage(){
 
   // }
 }
+}
 
+function mouseClicked() {
+  // Check if Buy or Sell button is clicked
+  for (let i = 0; i < stocks.length; i++) {
+    if (buyButtons[i].isClicked(mouseX, mouseY)) {
+      buyButtons[i].onClick();
+    }
+
+    if (sellButtons[i].isClicked(mouseX, mouseY)) {
+      sellButtons[i].onClick();
+    }
+  }
+}
 
 
 function businessPage(){
@@ -493,10 +432,7 @@ function businessPage(){
     fill('#122C3F');
     rect(0,0,width/10, height, 0, 20, 20, 0);
     // homeButton.draw();
-    stockButton.draw();
-    businessButton.draw();
-    profileButton.draw();
-    rankingButton.draw();
+    pageButtons();
 
   }
 
@@ -519,10 +455,7 @@ function profilePage(){
     fill('#122C3F');
     rect(0,0,width/10, height, 0, 20, 20, 0);
     // homeButton.draw();
-    stockButton.draw();
-    businessButton.draw();
-    profileButton.draw();
-    rankingButton.draw();
+    pageButtons();
 
     // The profile card
     fill('#122C3F');
@@ -565,11 +498,7 @@ function rankingPage(){
     background('#90BDDF');
     fill('#122C3F');
     rect(0,0,width/10, height, 0, 20, 20, 0);
-    // homeButton.draw();
-    stockButton.draw();
-    businessButton.draw();
-    profileButton.draw();
-    rankingButton.draw();
+    pageButtons();
 
   }
 
@@ -775,41 +704,113 @@ function rankingPage(){
   // text(`Total Portfolio Value: $${user.calculatePortfolioValue().toFixed(2)}`, xOffset, height - 10);
 // }
 
-function mouseClicked() {
-  // Check if Buy or Sell button is clicked
-  for (let i = 0; i < stocks.length; i++) {
-    if (buyButtons[i].isClicked(mouseX, mouseY)) {
-      buyButtons[i].onClick();
+
+class Stock {
+  constructor(name, initialPrice, volatility) {
+    this.name = name;
+    this.price = initialPrice;
+    this.history = [];
+    this.volatility = volatility;
+    this.quantity = 0;
+  }
+
+  updatePrice() {
+    // Simulate a random walk model
+    let randomChange = randomGaussian(0, this.volatility);
+    this.price += randomChange;
+
+    // Ensure the price doesn't go negative
+    this.price = max(this.price, 0);
+
+    // Store the current stock price in the history array
+    this.history.push(this.price);
+
+    // Trim the history array to keep only the last 30 values
+    if (this.history.length > 30) {
+      this.history.shift();
     }
+  }
 
-    if (sellButtons[i].isClicked(mouseX, mouseY)) {
-      sellButtons[i].onClick();
+  drawGraph(x, y, width, height) {
+    // Draw the stock price graph
+    noFill();
+    stroke(0, 0, 255);
+    strokeWeight(2);
+    beginShape();
+    for (let i = 0; i < this.history.length; i++) {
+      let graphX = map(i, 0, this.history.length - 1, x, x + width);
+      let graphY = map(this.history[i], min(this.history), max(this.history), y + height, y);
+      vertex(graphX, graphY);
+    }
+    endShape();
+
+    // Draw graph border
+    noFill();
+    stroke(200);
+    strokeWeight(1);
+    rect(x, y, width, height);
+  }
+}
+
+class buttons {
+  constructor(label, x, y, width, height, onClick) {
+    this.label = label;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.onClick = onClick;
+  }
+
+  display() {
+    fill(150);
+    rect(this.x, this.y, this.width, this.height);
+    fill(255);
+    textSize(12);
+    textAlign(CENTER, CENTER);
+    text(this.label, this.x + this.width / 2, this.y + this.height / 2);
+  }
+
+  isClicked(mouseX, mouseY) {
+    return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;
+  }
+}
+
+class User {
+  constructor() {
+    this.balance = 1000;
+    this.holdings = [];
+  }
+
+  buyStock(stock, quantity) {
+    let totalCost = stock.price * quantity;
+    if (this.balance >= totalCost) {
+      this.balance -= totalCost;
+      if (!this.holdings.includes(stock)) {
+        stock.quantity = 0;
+        this.holdings.push(stock);
+      }
+      stock.quantity += quantity;
+      return true; // Buy successful
+    } else {
+      return false; // Insufficient funds
     }
   }
-}
 
-function updateStockPrices() {
-  // Update prices for all stocks
-  for (let stock of stocks) {
-    stock.updatePrice();
+  sellStock(stock, quantity) {
+    if (stock.quantity >= quantity) {
+      this.balance += stock.price * quantity;
+      stock.quantity -= quantity;
+      if (stock.quantity === 0) {
+        this.holdings = this.holdings.filter((s) => s !== stock);
+      }
+      return true; // Sell successful
+    } else {
+      return false; // Insufficient stocks to sell
+    }
   }
-}
 
-function buyStockPrompt(stock) {
-  let quantity = prompt(`Enter the quantity of ${stock.name} stocks you want to buy:`);
-  quantity = parseInt(quantity);
-  if (!isNaN(quantity) && quantity > 0) {
-    user.buyStock(stock, quantity);
+  calculatePortfolioValue() {
+    return this.holdings.reduce((total, stock) => total + stock.price * stock.quantity, 0);
   }
-}
-
-function sellStockPrompt(stock) {
-  let quantity = prompt(`Enter the quantity of ${stock.name} stocks you want to sell:`);
-  quantity = parseInt(quantity);
-  if (!isNaN(quantity) && quantity > 0) {
-    user.sellStock(stock, quantity);
-  }
-}
-
-
 }
