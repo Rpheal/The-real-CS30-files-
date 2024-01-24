@@ -5,8 +5,12 @@
 
 
 
+
+
+
+
 let score = 0;
-let balance = 1000;
+let balance = 10000;
 let stockPrice = 100;
 let stocksOwned = 0;
 let buyStockButton;
@@ -39,7 +43,16 @@ let buyButtons = [];
 let sellButtons = [];
 
 
+let homes = [];
+let cars = [];
+function preload(){
+  for(let i =1; i<7; i++){
+    homes[i] = loadImage("assets/Home" + i + ".jpg")
+    cars[i] = loadImage("assets/Car" + i+".jpg");
+    }
+ 
 
+}
 
 
 
@@ -49,10 +62,6 @@ function pageButtons(){
   profileButton.draw();
   rankingButton.draw();
 }
-
-
-
-
 function setup() {
 
 
@@ -215,6 +224,18 @@ function setup() {
     color: '#06f'
   })
 
+  buyHomeButton = new Button({
+    x: 1000 , y: 700,
+    width: 100,   height: 50, // properties of the button
+    //style.background('green');
+    content: 'Buy',
+    on_press() {
+      // buyStock();
+    }
+  });
+
+
+  buyHomeButton.style("default", {background: 'green', color: '#fff'});
 
 }
 
@@ -256,9 +277,6 @@ function homePage(){
    
   }
 
-
-
-
   this.draw = function(){
     background('#90BDDF');
     fill(0);
@@ -292,7 +310,7 @@ function stockPage(){
 
 
   this.setup = function(){
-    setInterval(updateStockPrices, 800);
+    setInterval(updateStockPrices, 200);
 
 
 
@@ -336,10 +354,10 @@ function stockPage(){
   // Initialize buttons
   for (let i = 0; i < stocks.length; i++) {
     let rowNum = floor(i / 2);
-    let colNum = i % 2;
+    let colNum = i % 2/1.3;
     strokeWeight(2);
-    let buyButtonX = 20 + colNum * (width / 2 + 90) + 500;
-    let sellButtonX = 20 + colNum * (width / 2 + 60) + 600;
+    let buyButtonX = 20 + colNum * (width / 2 + 90) + 800;
+    let sellButtonX = 20 + colNum * (width / 2 + 60) + 900;
     let buttonY = 30 + rowNum * (height / 5) + (height / 6) - 20;
 
 
@@ -454,9 +472,9 @@ function stockPage(){
 function businessPage(){
   // building the home page of the simulator using the Scene Manager
 
-
   this.setup = function(){
    
+
   }
 
 
@@ -465,9 +483,11 @@ function businessPage(){
   this.draw = function(){
     background('#90BDDF');
     fill('#122C3F');
+    image(homes[1], 600,100);
     rect(0,0,width/10, height, 0, 20, 20, 0);
     pageButtons();
     homeButton.draw();
+    buyHomeButton.draw();
 
 
   }
@@ -688,7 +708,7 @@ class buttons {
 
 class User {
   constructor() {
-    this.balance = 1000;
+    this.balance = 10000;
     this.holdings = [];
   }
 
@@ -704,6 +724,7 @@ class User {
         this.holdings.push(stock);
       }
       stock.quantity += quantity;
+      console.log(quantity);
       return true; // Buy successful
     } else {
       return false; // Insufficient funds
@@ -720,6 +741,7 @@ class User {
       if (stock.quantity === 0) {
         this.holdings = this.holdings.filter((s) => s !== stock);
       }
+      console.log(quantity);
       return true; // Sell successful
     } else {
       return false; // Insufficient stocks to sell
